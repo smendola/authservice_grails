@@ -15,22 +15,13 @@ class User {
 	String username
 	String password
 
-	private String savedPassword
-	private String getSavedPassword() {
-		throw new Exception("NO")
-	}
-
 	def beforeUpdate() {
-		println "BEFORE UPDATE"
-		if (savedPassword != password) {
-			savedPassword = password
+		if (isDirty('password')) {
 			password = DigestUtils.md5Hex(password)
 		}
 	}
 
 	def beforeInsert() {
-		println "BEFORE INSERT"
-		savedPassword = password
 		password = DigestUtils.md5Hex(password)
 		username.replace("#", new Date().toString())
 	}
@@ -40,14 +31,5 @@ class User {
 		lastName blank: false
 		username blank: false, unique: true
 		password blank: false
-	}
-
-	static sal() {
-		new User(
-			username:'smendola',
-			password:'123',
-			lastName: 'Mendola',
-			firstName: 'Salvatore'
-		)
 	}
 }

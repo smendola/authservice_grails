@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>authservice</name>
+	<name>Auth_Service_Grails</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -26,7 +26,7 @@
 		<link>
 			<name>.link_to_grails_plugins</name>
 			<type>2</type>
-			<locationURI>GRAILS_ROOT/2.0.0/projects/authservice/plugins</locationURI>
+			<locationURI>GRAILS_ROOT/2.0.0/projects/service/plugins</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

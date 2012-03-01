@@ -1,9 +1,9 @@
 package com.pht.service.auth
 
-import java.util.Date;
+class Role {
+	static hasMany = [users:User]
+	static belongsTo = User
 
-class Role extends DomainObject {
-	static hasMany = [roles:Role]
 	String name;
 
     static constraints = {
