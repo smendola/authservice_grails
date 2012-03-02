@@ -63,22 +63,6 @@
         <servlet-class>org.codehaus.groovy.grails.web.pages.GroovyPagesServlet</servlet-class>
     </servlet>
 
-  <servlet>
-    <servlet-name>JSONRPCServlet</servlet-name>
-    <servlet-class>org.jabsorb.JSONRPCServlet</servlet-class>
-    <init-param>
-      <param-name>gzip_threshold</param-name>
-      <param-value>200</param-value>
-    </init-param>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>JSONRPCServlet</servlet-name>
-    <url-pattern>/JSON-RPC</url-pattern>
-  </servlet-mapping>
-
-  
-  
     <servlet-mapping>
         <servlet-name>gsp</servlet-name>
         <url-pattern>*.gsp</url-pattern>

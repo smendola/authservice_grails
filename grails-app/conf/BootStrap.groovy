@@ -6,6 +6,9 @@ class BootStrap {
 
 	def init = { servletContext ->
 
+		// If the methods are static, then use this form
+		//JSONRPCBridge.getGlobalBridge().registerClass("AuthService", AuthService);
+
 		AuthService svc = new AuthService()
 
 		JSONRPCBridge.getGlobalBridge().registerObject("AuthService", svc);
