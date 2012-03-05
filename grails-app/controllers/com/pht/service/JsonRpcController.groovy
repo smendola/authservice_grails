@@ -2,9 +2,11 @@ package com.pht.service;
 
 import java.lang.reflect.Method
 
-import com.google.protobuf.ServiceException
+import groovy.json.JsonSlurper
 
-import groovy.json.JsonSlurper;
+
+
+
 
 class JsonRpcController {
 	
@@ -40,7 +42,7 @@ class JsonRpcController {
 				fail("JSON-RPC method not specified")
 			}
 
-			Method m = service.metaClass.methods.find {it.name == methodName}.getCachedMethod()
+			Method m = service.metaClass.methods.find {it.name == methodName}?.getCachedMethod()
 			if (m == null) {
 				fail("Service does not implement method named " + methodName)
 			}
@@ -48,13 +50,24 @@ class JsonRpcController {
 		
 			def res;
 			if (params instanceof List) {
-				List<Class> formals = m.getParameterTypes();
-				if (formals.size() != params.size()) {
-					fail("Wrong number of parameters for $methodName; expected ${formals.size()}, got ${params.size()}")
+				List<Class> formalTypes = m.parameterTypes;
+				if (formalTypes.size() != params.size()) {
+					fail("Wrong number of parameters for $methodName; expected ${formalTypes.size()}, got ${params.size()}")
 				}
-				for (int i=0; i < formals.size(); i++) {
-					if (!formals[i].isAssignableFrom(params[i].getClass())) {
-						fail("Parameter #$i is of the wrong type; expected ${formals[i].getClass().getName()}, got ${params[i].getClass().getName()}")
+				for (int i=0; i < formalTypes.size(); i++) {
+					if (params[i] == null) continue // allow null for all parameters
+					Class<?> formalType = formalTypes[i]
+					Class<?> actualType = params[i].getClass()
+					if (formalType.isPrimitive() && !actualType.isPrimitive()) {
+						// Ugh, !isAssignableFrom, but in fact is assignable
+						// I tried CachedMethod.getParamType().isValidMethod() and couldn't get it to work
+						// so...
+						if (formalType == int && actualType == Integer) {
+							continue; //
+						}
+					}
+					if (!formalType.isAssignableFrom(actualType)) {
+						fail("Parameter #$i is of the wrong type; expected ${formalType.getName()}, got ${actualType.getName()}")
 					}
 				}
 				res = service.invokeMethod(methodName, params as Object[])

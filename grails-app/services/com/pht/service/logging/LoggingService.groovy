@@ -50,7 +50,7 @@ class LoggingService {
 	}
 	
 	Map Stats(String family, String level, String expr) {
-		[ count: mkQuery(family, level, expr).count() ]
+		[count: mkQuery(family, level, expr).count()]
 	}
 	
 }
