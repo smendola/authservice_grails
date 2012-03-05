@@ -2,12 +2,15 @@ package com.pht.service.logging
 
 import org.springframework.transaction.annotation.Transactional
 
+import com.pht.service.logging.dto.LogDto
+
 import grails.gorm.DetachedCriteria
 
 class LoggingService {
 	
-	def Log(String family, String level, String message) {
-		new Log(family:family, level:level, message:message).save(failOnError:true)
+	LogDto Log(String family, String level, String message) {
+		Log log = new Log(family:family, level:level, message:message).save(failOnError:true)
+		new LogDto(log)
 	}
 	
 //	protected DetachedCriteria mkQuery(String family=null, String level=null, String expr=null, int max=0, int offset=0) {
@@ -40,8 +43,10 @@ class LoggingService {
 		return search
 	}
 
-	List<Log> Query(String family, String level, String expr, int max, int offset) {
-		mkQuery(family, level, expr, max, offset).list()
+	List<LogDto> Query(String family, String level, String expr, int max, int offset) {
+		def query = mkQuery(family, level, expr, max, offset)
+		def logs = query.list()
+		def res = logs.collect { new LogDto(it) }
 	}
 	
 	@Transactional
@@ -49,7 +54,7 @@ class LoggingService {
 		mkQuery(family, level, expr).deleteAll()
 	}
 	
-	Map Stats(String family, String level, String expr) {
+	Map<String,Integer> Stats(String family, String level, String expr) {
 		[count: mkQuery(family, level, expr).count()]
 	}
 	

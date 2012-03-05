@@ -10,51 +10,60 @@ import com.pht.service.ServiceException
 
 class AuthService {
 
-	List<User> ListUsers() {
-		User.list()
+	List<UserDto> ListUsers() {
+		User.list().collect {
+			new UserDto(it)
+		}
 	}
 	
 	@Transactional
-	User AddUser(HashMap info) {
+	UserDto AddUser(HashMap info) {
 		User user = User.newInstance(info)
 		user.save(failOnError:true)
+		new UserDto(user)
 	}
 	
 	@Transactional
-	User UpdateUser(HashMap info) {
+	UserDto UpdateUser(HashMap info) {
 		User user = GetUser(info.username)
 		for (Entry ent in info) {
 			user[ent.key] = ent.value
 		}
 		user.save(failOnError:true)
+		new UserDto(user)
 	}
 
-	User GetUser(String username) {
-		User.findByUsername(username) ?: fail("No such user: ${username}")
+	UserDto GetUser(String username) {
+		User user = User.findByUsername(username) ?: fail("No such user: ${username}")
+		new UserDto(user)
 	}
 
+	@Transactional
 	String DeleteUser(username) {
-		User.withTransaction {
-			GetUser(username).delete();
-		}
+		GetUser(username).delete();
 		"OK"
 	}
 
 	@Transactional
-	Role AddRole(HashMap info) {
+	RoleDto AddRole(HashMap info) {
 		Role.newInstance(info).save(failOnError:true)
 	}
 
-	List<Role> ListRoles() {
-		Role.list();
+	List<RoleDto> ListRoles() {
+		Role.list().collect {
+			new RoleDto(it)
+		}
 	}
 
-	Role GetRole(String roleName) {
-		Role.findByName(roleName) ?: fail("No such role as ${roleName}")
+	RoleDto GetRole(String roleName) {
+		Role role = Role.findByName(roleName) ?: fail("No such role as ${roleName}")
+		new RoleDto(role)
 	}
 
-	List<User> ListUsersInRole(String roleName) {
-		User.where { roles { name == roleName } }.list()
+	List<UserDto> ListUsersInRole(String roleName) {
+		User.where { roles { name == roleName } }.collect() {
+			new UserDto(it)
+		}
 	}
 	
 	@Transactional
