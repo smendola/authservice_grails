@@ -55,19 +55,21 @@ class JsonRpcController {
 					fail("Wrong number of parameters for $methodName; expected ${formalTypes.size()}, got ${params.size()}")
 				}
 				for (int i=0; i < formalTypes.size(); i++) {
-					if (params[i] == null) continue // allow null for all parameters
 					Class<?> formalType = formalTypes[i]
 					Class<?> actualType = params[i].getClass()
+					if (params[i] == null  && !formalType.isPrimitive()) continue // allow null for non-primitive parameters
 					if (formalType.isPrimitive() && !actualType.isPrimitive()) {
 						// Ugh, !isAssignableFrom, but in fact is assignable
 						// I tried CachedMethod.getParamType().isValidMethod() and couldn't get it to work
 						// so...
 						if (formalType == int && actualType == Integer) {
-							continue; //
+							continue
 						}
+						// TODO handle other similar combos float/Float, etc.
 					}
 					if (!formalType.isAssignableFrom(actualType)) {
-						fail("Parameter #$i is of the wrong type; expected ${formalType.getName()}, got ${actualType.getName()}")
+						def friendly = {cls -> cls.getName().replaceAll(/.*[.]/, '').toLowerCase()}
+						fail("Parameter #$i is of the wrong type; expected ${friendly(formalType)}, got ${friendly(actualType)}")
 					}
 				}
 				res = service.invokeMethod(methodName, params as Object[])

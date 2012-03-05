@@ -1,20 +1,27 @@
 import com.pht.service.auth.*
+import com.pht.service.logging.LoggingService
 
 class BootStrap {
 
 	def init = { servletContext ->
 
-		AuthService svc = new AuthService()
+		AuthService authService = new AuthService()
 
-		svc.AddUser([username:'smendola', password:'123', firstName: 'Sal', lastName:'Mendola'])
-		svc.AddUser([username:'jripper', password:'123', firstName: 'Jack', lastName:'Ripper'])
-		svc.AddUser([username:'jbauer', password:'123', firstName: 'Jack', lastName:'Bauer'])
+		authService.AddUser([username:'smendola', password:'123', firstName: 'Sal', lastName:'Mendola'])
+		authService.AddUser([username:'jripper', password:'123', firstName: 'Jack', lastName:'Ripper'])
+		authService.AddUser([username:'jbauer', password:'123', firstName: 'Jack', lastName:'Bauer'])
 
-        svc.AddRole([name:"Admin"])
-        svc.AddRole([name:"Guest"])
-        svc.AddRole([name:"Reviewer"])
+        authService.AddRole([name:"Admin"])
+        authService.AddRole([name:"Guest"])
+        authService.AddRole([name:"Reviewer"])
   		
-		svc.AssignUserRoles('smendola', ['Admin', 'Reviewer'])
+		authService.AssignUserRoles('smendola', ['Admin', 'Reviewer'])
+		
+		LoggingService loggingService = new LoggingService()
+		
+		loggingService.Log("main", "normal", "this is the first log entry")
+		loggingService.Log("main", "high", "elevated level")
+		loggingService.Log("other", "normal", "this message is in another family")
 	}
 	def destroy = {
 	}
