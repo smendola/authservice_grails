@@ -1,21 +1,12 @@
 package com.pht.service.auth
 
-import groovy.transform.InheritConstructors;
 
 import java.util.Map.Entry
 
 import org.apache.commons.codec.digest.DigestUtils
 import org.springframework.transaction.annotation.Transactional
 
-@InheritConstructors
-class ServiceException extends Exception {
-	int code
-	ServiceException(String message, int code) {
-		super(message)
-		this.code = code
-	}
-}
-
+import com.pht.service.ServiceException
 
 class AuthService {
 

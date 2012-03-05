@@ -31,14 +31,14 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.jboss.com/maven2/"
 		//mavenRepo "http://repo1.maven.org/"
 		////mavenRepo "http://maven.ow2.org/maven2/"
-		flatDir name:'myJars', dirs:"lib"
+		//flatDir name:'myJars', dirs:"lib"
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         // runtime 'mysql:mysql-connector-java:5.1.16'
 		////runtime 'org.jabsorb:jabsorb:1.3.1'
-		runtime ':jabsorb:1.3.3'
+		//runtime ':jabsorb:1.3.3'
     }
 
     plugins {

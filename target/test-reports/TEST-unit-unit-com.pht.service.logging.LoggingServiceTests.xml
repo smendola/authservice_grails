@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="4" failures="0" hostname="smendola-t520" name="com.pht.service.logging.LoggingServiceTests" tests="4" time="0.162" timestamp="2012-03-05T03:12:00">
+  <properties />
+  <testcase classname="com.pht.service.logging.LoggingServiceTests" name="testSave" time="0.115">
+    <error message="Cannot invoke method Query() on null object" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke method Query() on null object
+	at com.pht.service.logging.LoggingServiceTests.testSave(LoggingServiceTests.groovy:18)
+</error>
+  </testcase>
+  <testcase classname="com.pht.service.logging.LoggingServiceTests" name="testQueryNoMatch" time="0.0060">
+    <error message="Cannot invoke method Log() on null object" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke method Log() on null object
+	at com.pht.service.logging.LoggingServiceTests.testQueryNoMatch(LoggingServiceTests.groovy:26)
+</error>
+  </testcase>
+  <testcase classname="com.pht.service.logging.LoggingServiceTests" name="testQueryFamilyMatch" time="0.0050">
+    <error message="Cannot invoke method Log() on null object" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke method Log() on null object
+	at com.pht.service.logging.LoggingServiceTests.testQueryFamilyMatch(LoggingServiceTests.groovy:34)
+</error>
+  </testcase>
+  <testcase classname="com.pht.service.logging.LoggingServiceTests" name="testQueryLevelMatch" time="0.0050">
+    <error message="Cannot invoke method Log() on null object" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke method Log() on null object
+	at com.pht.service.logging.LoggingServiceTests.testQueryLevelMatch(LoggingServiceTests.groovy:45)
+</error>
+  </testcase>
+  <system-out><![CDATA[--Output from testSave--
+--Output from testQueryNoMatch--
+--Output from testQueryFamilyMatch--
+--Output from testQueryLevelMatch--
+]]></system-out>
+  <system-err><![CDATA[--Output from testSave--
+--Output from testQueryNoMatch--
+--Output from testQueryFamilyMatch--
+--Output from testQueryLevelMatch--
+]]></system-err>
+</testsuite>

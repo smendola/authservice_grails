@@ -1,0 +1,39 @@
+Testsuite: com.pht.service.logging.LoggingServiceTests
+Tests run: 4, Failures: 0, Errors: 4, Time elapsed: 0.162 sec
+------------- Standard Output ---------------
+--Output from testSave--
+--Output from testQueryNoMatch--
+--Output from testQueryFamilyMatch--
+--Output from testQueryLevelMatch--
+------------- ---------------- ---------------
+------------- Standard Error -----------------
+--Output from testSave--
+--Output from testQueryNoMatch--
+--Output from testQueryFamilyMatch--
+--Output from testQueryLevelMatch--
+------------- ---------------- ---------------
+
+Testcase: testSave took 0.112 sec
+	Caused an ERROR
+Cannot invoke method Query() on null object
+java.lang.NullPointerException: Cannot invoke method Query() on null object
+	at com.pht.service.logging.LoggingServiceTests.testSave(LoggingServiceTests.groovy:18)
+
+Testcase: testQueryNoMatch took 0.005 sec
+	Caused an ERROR
+Cannot invoke method Log() on null object
+java.lang.NullPointerException: Cannot invoke method Log() on null object
+	at com.pht.service.logging.LoggingServiceTests.testQueryNoMatch(LoggingServiceTests.groovy:26)
+
+Testcase: testQueryFamilyMatch took 0.005 sec
+	Caused an ERROR
+Cannot invoke method Log() on null object
+java.lang.NullPointerException: Cannot invoke method Log() on null object
+	at com.pht.service.logging.LoggingServiceTests.testQueryFamilyMatch(LoggingServiceTests.groovy:34)
+
+Testcase: testQueryLevelMatch took 0.005 sec
+	Caused an ERROR
+Cannot invoke method Log() on null object
+java.lang.NullPointerException: Cannot invoke method Log() on null object
+	at com.pht.service.logging.LoggingServiceTests.testQueryLevelMatch(LoggingServiceTests.groovy:45)
+
