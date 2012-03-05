@@ -49,8 +49,8 @@ class LoggingService {
 		mkQuery(family, level, expr).deleteAll()
 	}
 	
-	int Stats(String family, String level, String expr) {
-		mkQuery(family, level, expr).count();
+	Map Stats(String family, String level, String expr) {
+		[ count: mkQuery(family, level, expr).count() ]
 	}
 	
 }
